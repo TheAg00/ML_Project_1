@@ -1,0 +1,101 @@
+,id,area,sq_mt_built,n_rooms,address,street_name,rent_price,buy_price,built_year,has_parking
+0,21742,"San Cristóbal, Madrid",64.0,2,"Piso en venta en calle de Godella, 64",Calle de Godella,471,85000,1960.0,False
+1,21741,"Los Ángeles, Madrid",70.0,3,Piso en venta en calle de la del Manojo de Rosas,Calle de la del Manojo de Rosas,666,129900,,False
+2,21740,"San Andrés, Madrid",94.0,2,"Piso en venta en calle del Talco, 68",Calle del Talco,722,144247,,False
+3,21739,"San Andrés, Madrid",64.0,2,Piso en venta en calle Pedro Jiménez,Calle Pedro Jiménez,583,109900,1955.0,False
+4,21738,"Los Rosales, Madrid",108.0,2,Piso en venta en carretera de Villaverde a Vallecas,Carretera de Villaverde a Vallecas,1094,260000,2003.0,True
+5,21737,"San Andrés, Madrid",126.0,4,Piso en venta en geologia,geologia,901,195000,1981.0,True
+6,21736,"San Andrés, Madrid",120.0,5,Piso en venta en avenida Real de Pinto,Avenida Real de Pinto,884,190000,,True
+7,21735,"Villaverde, Madrid",125.0,3,Piso en venta en San Andrés,,912,198500,,False
+8,21734,"Villaverde, Madrid",84.0,3,Piso en venta en Butarque,,954,212000,,True
+9,21733,"Los Rosales, Madrid",85.0,2,Piso en venta en calle de Martinez Oviol,Calle de Martinez Oviol,672,131400,1950.0,False
+10,21732,"San Andrés, Madrid",69.0,2,Piso en venta en De la Plata - Villaverde,De la Plata - Villaverde,617,118000,1963.0,False
+11,21731,"Villaverde, Madrid",122.0,3,Piso en venta en Butarque,,1058,246900,,True
+12,21730,"Los Rosales, Madrid",123.0,3,"Piso en venta en calle de la Unanimidad, 67",Calle de la Unanimidad,901,195000,1992.0,False
+13,21729,"Los Ángeles, Madrid",109.0,3,"Piso en venta en calle de Anoeta, 63",Calle de Anoeta,933,205000,1983.0,False
+14,21728,"San Cristóbal, Madrid",64.0,3,Piso en venta en calle GODELLA,Calle GODELLA,408,72000,1960.0,False
+15,21727,"Los Rosales, Madrid",115.0,3,Piso en venta en calle San Macario,Calle San Macario,780,160000,,False
+16,21726,"Villaverde, Madrid",115.0,3,Piso en venta en Los Rosales,,867,184900,,False
+17,21725,"Villaverde, Madrid",65.0,3,Piso en venta en Los Ángeles,,494,90000,,False
+18,21724,"Villaverde, Madrid",75.0,3,Piso en venta en San Andrés,,666,129900,,False
+19,21723,"Villaverde, Madrid",60.0,2,Piso en venta en San Cristóbal,,516,94900,,False
+20,21722,"Villaverde, Madrid",60.0,2,Piso en venta en San Andrés,,493,89900,,False
+21,21721,"Villaverde, Madrid",95.0,4,Piso en venta en Los Ángeles,,724,144900,,False
+22,21720,"Villaverde, Madrid",76.0,3,Piso en venta en San Andrés,,583,110000,,False
+23,21719,"San Andrés, Madrid",51.0,2,Piso en venta en camino Leganés,Camino Leganés,508,93000,,False
+24,21718,"San Andrés, Madrid",134.0,3,Piso en venta en calle de las Islas,Calle de las Islas,666,130000,,False
+25,21717,"San Andrés, Madrid",62.0,2,Piso en venta en calle de Parvillas Bajas,Calle de Parvillas Bajas,557,104000,,False
+26,21716,"San Andrés, Madrid",75.0,3,Piso en venta en COBALTO s/n,,698,138000,1984.0,True
+27,21715,"Villaverde, Madrid",112.0,4,Piso en venta en Butarque,,1148,280000,,True
+28,21714,"Los Rosales, Madrid",65.0,3,Piso en venta en calle Villajoyosa,Calle Villajoyosa,744,150000,1976.0,False
+29,21713,"San Andrés, Madrid",70.0,2,Piso en venta en paseo de Alberto Palacios,Paseo de Alberto Palacios,728,145900,1968.0,False
+30,21712,"San Andrés, Madrid",75.0,1,Piso en venta en calle Laguna del Marquesado,Calle Laguna del Marquesado,505,92500,2008.0,False
+31,21711,"Los Rosales, Madrid",123.0,3,Piso en venta en carretera de Villaverde a Vallecas,Carretera de Villaverde a Vallecas,1195,298000,2002.0,True
+32,21710,"San Andrés, Madrid",61.0,3,Piso en venta en camino Leganés,Camino Leganés,539,99900,,False
+33,21709,"Villaverde, Madrid",72.0,2,Piso en venta en San Andrés,,698,138000,,True
+34,21708,"Butarque, Madrid",61.0,3,"Piso en venta en Concepción de la Oliva, 21",Concepción de la Oliva,539,100000,1966.0,False
+35,21707,"San Andrés, Madrid",71.0,3,Piso en venta en San Neviano - Villaverde,San Neviano - Villaverde,672,131400,1980.0,False
+36,21706,"Villaverde, Madrid",87.0,3,Piso en venta en Los Rosales,,521,96000,,False
+37,21705,"San Andrés, Madrid",60.0,2,Piso en venta en paseo de Alberto Palacios,Paseo de Alberto Palacios,758,154000,,False
+38,21704,"Los Ángeles, Madrid",78.0,4,Piso en venta en calle la Dolorosa,Calle la Dolorosa,731,146700,,False
+39,21703,"Los Rosales, Madrid",52.0,1,Piso en venta en calle Encarnación Oviol,Calle Encarnación Oviol,505,92500,,False
+40,21702,"Butarque, Madrid",125.0,3,Dúplex en venta en calle ESTEFANITA,Calle ESTEFANITA,1135,275000,2004.0,False
+41,21701,"San Andrés, Madrid",75.0,0,Estudio en venta en calle Laguna del Marquesado,Calle Laguna del Marquesado,465,83800,2008.0,False
+42,21700,"Butarque, Madrid",97.0,2,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1111,266122,,False
+43,21699,"Butarque, Madrid",93.0,2,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1004,228273,,False
+44,21698,"Los Ángeles, Madrid",103.0,4,Piso en venta en calle de la del Manojo de Rosas,Calle de la del Manojo de Rosas,823,171900,,False
+45,21697,"Butarque, Madrid",83.0,2,Ático en venta en Villaverde a perales,Villaverde a perales,1004,228273,2020.0,True
+46,21696,"Los Rosales, Madrid",45.0,2,Piso en venta en calle de Juan José Martínez Seco,Calle de Juan José Martínez Seco,471,85000,1968.0,False
+47,21695,"Los Rosales, Madrid",120.0,3,Piso en venta en carretera de Villaverde a Vallecas,Carretera de Villaverde a Vallecas,1195,298000,,True
+48,21694,"Los Ángeles, Madrid",74.0,3,"Piso en venta en calle la del Soto del Parral, 59",Calle la del Soto del Parral,702,139000,,False
+49,21693,"Butarque, Madrid",125.0,3,"Dúplex en venta en calle Estefanita, 6",Calle Estefanita,1128,272500,2004.0,False
+50,21692,"Butarque, Madrid",126.0,4,Piso en venta en calle Berrocal,Calle Berrocal,1135,275000,,True
+51,21691,"Butarque, Madrid",158.0,3,"Ático en venta en calle Euskalduna, 14",Calle Euskalduna,1172,289000,2003.0,True
+52,21690,"Villaverde, Madrid",65.0,2,Piso en venta en Los Rosales,,604,115000,,False
+53,21689,"Los Ángeles, Madrid",108.0,3,Piso en venta en calle Alcocer,Calle Alcocer,847,179000,1978.0,False
+54,21688,"Villaverde, Madrid",62.0,2,Piso en venta en San Andrés,,638,123000,1984.0,False
+55,21687,"Los Rosales, Madrid",51.0,2,Piso en venta en calle Topacio,Calle Topacio,492,89500,1967.0,False
+56,21686,"Butarque, Madrid",112.0,3,"Piso en venta en calle Calcio, 15",Calle Calcio,1172,289000,2013.0,True
+57,21685,"Butarque, Madrid",109.0,3,"Piso en venta en calle Camas, 2",Calle Camas,968,216278,,True
+58,21684,"Butarque, Madrid",107.0,3,"Piso en venta en calle Camas, 2",Calle Camas,940,207503,,True
+59,21683,"Butarque, Madrid",76.0,2,"Piso en venta en calle Camas, 2",Calle Camas,790,162793,,True
+60,21682,"Butarque, Madrid",105.0,3,"Piso en venta en calle Camas, 2",Calle Camas,933,204999,,True
+61,21681,"Butarque, Madrid",109.0,3,"Piso en venta en calle Camas, 2",Calle Camas,982,220879,,True
+62,21680,"Butarque, Madrid",108.0,3,"Piso en venta en calle Camas, 2",Calle Camas,974,218258,,True
+63,21679,"Butarque, Madrid",109.0,3,"Piso en venta en calle Camas, 2",Calle Camas,1014,231855,,True
+64,21678,"Butarque, Madrid",76.0,2,"Piso en venta en calle Camas, 2",Calle Camas,793,163397,,True
+65,21677,"Butarque, Madrid",76.0,2,"Piso en venta en calle Camas, 2",Calle Camas,783,160759,,True
+66,21676,"Butarque, Madrid",108.0,3,"Piso en venta en calle Camas, 2",Calle Camas,970,217169,,True
+67,21675,"Butarque, Madrid",76.0,2,"Piso en venta en calle Camas, 2",Calle Camas,799,165208,,True
+68,21674,"Butarque, Madrid",109.0,3,"Piso en venta en calle Camas, 2",Calle Camas,978,219775,,True
+69,21673,"Butarque, Madrid",108.0,3,"Piso en venta en calle Camas, 2",Calle Camas,1011,230817,,True
+70,21672,"Butarque, Madrid",108.0,3,"Piso en venta en calle Camas, 2",Calle Camas,960,213722,,True
+71,21671,"Butarque, Madrid",111.0,2,"Ático en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1011,230749,,True
+72,21670,"Butarque, Madrid",115.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1020,233789,,True
+73,21669,"Butarque, Madrid",115.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1011,230789,,True
+74,21668,"Butarque, Madrid",117.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1050,244171,,True
+75,21667,"Butarque, Madrid",117.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1048,243468,,True
+76,21666,"Butarque, Madrid",117.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1052,244798,,True
+77,21665,"Butarque, Madrid",118.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,977,219235,,True
+78,21664,"Butarque, Madrid",115.0,3,"Piso en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,1046,242789,,True
+79,21663,"San Andrés, Madrid",97.0,4,Piso en venta en calle Parvillas Altas s/n,,666,130000,1970.0,False
+80,21662,"Butarque, Madrid",106.0,3,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1071,251569,,False
+81,21661,"Butarque, Madrid",103.0,3,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1025,235402,,False
+82,21660,"Butarque, Madrid",103.0,3,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1024,235172,,False
+83,21659,"Butarque, Madrid",103.0,3,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1027,236227,,False
+84,21658,"Butarque, Madrid",114.0,3,"Piso en venta en calle Arroyo de la Bulera, 31",Calle Arroyo de la Bulera,1080,254710,,False
+85,21657,"San Andrés, Madrid",150.0,2," Chalet adosado en venta en calle Emilia Ballester, Madrid, 15",Calle Emilia Ballester,777,159000,1993.0,True
+86,21656,"Butarque, Madrid",140.0,3,"Dúplex en venta en calle Estefanita, 6",Calle Estefanita,1128,272500,2004.0,False
+87,21655,"Los Rosales, Madrid",58.0,3,Piso en venta en calle del Estroncio,Calle del Estroncio,471,85000,1951.0,False
+88,21654,"San Cristóbal, Madrid",65.0,3,Piso en venta en calle Moncada,Calle Moncada,512,94000,,False
+89,21653,"Los Rosales, Madrid",110.0,4,Piso en venta en calle de Martinez Oviol,Calle de Martinez Oviol,833,175000,1978.0,False
+90,21652,"Villaverde, Madrid",173.0,4,Piso en venta en Butarque,,1116,268000,2003.0,True
+91,21651,"Villaverde, Madrid",75.0,2,Ático en venta en San Andrés,,766,156000,,False
+92,21650,"Butarque, Madrid",90.0,1,"Ático en venta en calle Ganados del Salobral , 12",Calle Ganados del Salobral ,861,183159,,True
+93,21649,"Los Rosales, Madrid",125.0,3,"Piso en venta en calle de la Generosidad, 16",Calle de la Generosidad,948,210000,1996.0,True
+94,21648,"San Andrés, Madrid",58.0,2,Piso en venta en calle de Tordegrillos,Calle de Tordegrillos,471,85000,1968.0,False
+95,21647,"Los Ángeles, Madrid",92.0,3,Piso en venta en avenida de la Verbena de la Paloma,Avenida de la Verbena de la Paloma,780,159900,1962.0,False
+96,21646,"San Andrés, Madrid",70.0,2,"Piso en venta en paseo Alberto Palacios, 35",Paseo Alberto Palacios,613,117000,1975.0,False
+97,21645,"San Andrés, Madrid",54.0,2,"Piso en venta en calle Doctor Pérez Domínguez, 2",Calle Doctor Pérez Domínguez,583,110000,1960.0,False
+98,21644,"Villaverde, Madrid",52.0,2,Piso en venta en Los Rosales,,539,100000,,False
+99,21643,"San Andrés, Madrid",108.0,3,Piso en venta en calle de los Cacereños,Calle de los Cacereños,705,140000,1995.0,False
