@@ -366,18 +366,19 @@ class FilterEstates():
 
 class PredictEstatePrice(FilterEstates):
     def __init__(self):
+        super().__init__(filteredOptions, realEstateData)
         self.y = np.array([2021, 2022, 2023, 2024])
 
-    def predictionEquation(slope, x, intercept):
+    def predictionEquation(self, slope, x, intercept):
         return int(intercept + slope * x) # y = β0 + β1 * x
 
-    def predictPrice(interestedEstates):
+    def predictPrice(self, interestedEstates):
         for estate in interestedEstates:
             x = np.array([estate["buy_price_2021"], estate["buy_price_2022"], estate["buy_price_2023"], estate["buy_price_2024"]])
 
-            slope, intercept, r, p, std_err = stats.linregress(y, x)
+            slope, intercept, r, p, std_err = stats.linregress(self.y, x)
 
-            price2025 = predictionEquation(slope, 2025, intercept)
+            price2025 = self.predictionEquation(slope, 2025, intercept)
 
             print("For estate with address " + estate["address"] + ", and id " + str(estate["id"]) + ":")
             print("Buy price 2021:", estate["buy_price_2021"])
@@ -389,7 +390,7 @@ class PredictEstatePrice(FilterEstates):
 
 
     def printPrices(self):
-        filterKeys = list(filter.keys())
+        filterKeys = list(self.filteredOptions.keys())
         totalKeys = len(filterKeys)
 
         # Αν ο χρήστης επέλεξε φίλτρα, ελέγχουμε τα ακίνητα που ταυτίζουν με αυτά. Αλλιώς εμφανίζουμε τις προβλέψεις για όλα τα ακίνητα.
@@ -401,20 +402,20 @@ class PredictEstatePrice(FilterEstates):
                 keysCount = 0
                 for key in filterKeys:
                     # Αν η τιμή του φίλτρου ταυτίζεται με την τιμή που έχουμε στα δεδομένα, αυξάνουμε τον μετρητή.
-                    if filter[key] == estate[key]: keysCount += 1
+                    if self.filteredOptions[key] == estate[key]: keysCount += 1
 
                 # Αν ο μετρητής είναι ίσος με τον αριθμό των φίλτρων που επέλεξε ο χρήστης, τότε το ακίνητο ταιριάζει με τις προτημήσεις του χρήστη.
                 if keysCount == totalKeys:
                     interestedEstates.append(estate)
 
-            predictPrice(interestedEstates)
+            self.predictPrice(interestedEstates)
             return
 
-        predictPrice(realEstateData)
+        self.predictPrice(realEstateData)
 
     
     def showResults(self):
-        printPrices()
+        self.printPrices()
 
     def showPredictions(self):
         self.chooseFitler()
@@ -432,6 +433,7 @@ if __name__ == "__main__":
 
     filteredOptions = dict()
     filter = FilterEstates(filteredOptions, realEstateData)
+    predict = PredictEstatePrice()
 
     # Εμφανίζουμε μήνυμα υποδοχής του χρήστη και του δίνουμε μενού επιλογών.
     print("Welcome!")
@@ -445,7 +447,7 @@ if __name__ == "__main__":
         try:
             choice = int(input("Enter your choice: "))
             if choice == 1: filter.insertData()
-            if choice == 2: showPredictions()
+            if choice == 2: predict.showPredictions()
             if choice == 3: break
         except ValueError:
             print("Invalid input!")
