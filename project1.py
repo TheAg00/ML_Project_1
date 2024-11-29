@@ -135,18 +135,18 @@ class FilterEstates():
         avaliableAreas = list()
         interestedAreas = list()
 
-        # Παίρνουμε όλες τις διαθέσιμες περιοχές από τα δεδομένα μας.
-        for area in realEstateData:
+        # Παίρνουμε όλες τις διαθέσιμες περιοχές που υπάρχουν στα δεδομένα μας.
+        for area in self.realEstateData:
             if area["area"] not in avaliableAreas: avaliableAreas.append(area["area"])
 
 
         while True:
-            # Εμφανίζουμε όλες τις περιοχές για να επιλέξει ο χρήστης.
+            # Εμφανίζουμε μενού με όλες τις περιοχές για να επιλέξει ο χρήστης.
             print("Insert the area you are interested in:")
-            i = 1
+            i = 0
             for area in avaliableAreas:
-                print(str(i) + ". " + area)
                 i += 1
+                print(str(i) + ". " + area)
 
             # Ο χρήστης επιλέγει περιοχή με έλεγχο εγκυρώτητας.
             while True:
@@ -154,7 +154,7 @@ class FilterEstates():
                     choice = int(input())
                     
                     if choice > 0 and choice < i + 1:
-                        interestedAreas = avaliableAreas[choice - 1]
+                        interestedAreas.append(avaliableAreas[choice - 1])
                         break
                     print("Invalid input!")
                 except ValueError:
@@ -380,7 +380,7 @@ class PredictEstatePrice(FilterEstates):
 
             price2025 = self.predictionEquation(slope, 2025, intercept)
 
-            print("For estate with address " + estate["address"] + ", and id " + str(estate["id"]) + ":")
+            print("For estate with address " + estate["address"] + " in area " + str(estate["area"]) + " and id " + str(estate["id"]) + ":")
             print("Buy price 2021:", estate["buy_price_2021"])
             print("Buy price 2022:", estate["buy_price_2022"])
             print("Buy price 2023:", estate["buy_price_2023"])
@@ -389,29 +389,44 @@ class PredictEstatePrice(FilterEstates):
             print()
 
 
+
     def printPrices(self):
         filterKeys = list(self.filteredOptions.keys())
         totalKeys = len(filterKeys)
+        notComparableKeys = ["address", "area", "has_parking"]
 
         # Αν ο χρήστης επέλεξε φίλτρα, ελέγχουμε τα ακίνητα που ταυτίζουν με αυτά. Αλλιώς εμφανίζουμε τις προβλέψεις για όλα τα ακίνητα.
         if totalKeys > 0:
             interestedEstates = list()
             
+            
             # Για κάθε ακίνητο, ελέγχουμε αν ισχύουν τα φίλτρα που επέλεξε ο χρήστης.
-            for estate in realEstateData:
+            for estate in self.realEstateData:
                 keysCount = 0
                 for key in filterKeys:
+                    # Σε περίπτωση που υπάρχει κλειδί με λίστα που έχει παραπάνω από μία τιμή,
+                    # ελέγχουμε αν οι τιμές ταυτίζονται με τις τιμές των δεδομένων και αν ναι,
+                    # αυξάνουμε το μετρητή και αποθηκεύουμε το ακίνητο στη λίστα με τα ακίνητα που ενδιαφέρεατι ο χρήστης.
+                    if(len(self.filteredOptions[key]) > 1):
+                        biggerLengthKey = 0
+                        for i in self.filteredOptions[key]:
+                            if i == estate[key]: 
+                                biggerLengthKey += 1
+                        if biggerLengthKey == len(self.filteredOptions[key]):
+                            interestedEstates.append(estate)
+                            break
+
                     # Αν η τιμή του φίλτρου ταυτίζεται με την τιμή που έχουμε στα δεδομένα, αυξάνουμε τον μετρητή.
                     if self.filteredOptions[key] == estate[key]: keysCount += 1
 
                 # Αν ο μετρητής είναι ίσος με τον αριθμό των φίλτρων που επέλεξε ο χρήστης, τότε το ακίνητο ταιριάζει με τις προτημήσεις του χρήστη.
-                if keysCount == totalKeys:
-                    interestedEstates.append(estate)
+                if keysCount == totalKeys: interestedEstates.append(estate)
+
 
             self.predictPrice(interestedEstates)
             return
 
-        self.predictPrice(realEstateData)
+        self.predictPrice(self.realEstateData)
 
     
     def showResults(self):
