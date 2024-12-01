@@ -235,7 +235,7 @@ class FilterEstates():
         self.filteredOptions["n_rooms"] = interestedRoomNum
 
 
-    def priceFilter(self, realEstateData):
+    def priceFilter(self):
         interestedPrice = list()
 
         # Ρωτάμε τον χρήστη την ελάχιστη τιμή που τον ενδιαφέρει.
@@ -364,6 +364,14 @@ class FilterEstates():
                 print("Invalid Input!")
 
 
+
+
+
+
+
+
+
+
 class PredictEstatePrice(FilterEstates):
     def __init__(self):
         super().__init__(filteredOptions, realEstateData)
@@ -372,21 +380,39 @@ class PredictEstatePrice(FilterEstates):
     def predictionEquation(self, slope, x, intercept):
         return int(intercept + slope * x) # y = β0 + β1 * x
 
+    def comp(self, year, estate, estate2024):
+        percentDiff = abs(estate - estate2024) / ((estate2024 + estate) / 2) * 100 # abs(b - a) / ((a + b) / 2) * 100
+        if year < "buy_price_2024": percentDiff = percentDiff * (-1)
+
+        return percentDiff
+
     def predictPrice(self, interestedEstates):
+        priceDiff = list()
+        percentDiffDict = list()
+
+        buyPriceYear = ["buy_price_2021", "buy_price_2022", "buy_price_2023", "buy_price_2025"]
+        
         for estate in interestedEstates:
             x = np.array([estate["buy_price_2021"], estate["buy_price_2022"], estate["buy_price_2023"], estate["buy_price_2024"]])
 
             slope, intercept, r, p, std_err = stats.linregress(self.y, x)
 
-            price2025 = self.predictionEquation(slope, 2025, intercept)
+            estate["buy_price_2025"] = self.predictionEquation(slope, 2025, intercept)
+
+            for year in buyPriceYear:
+                percentDiffDict.append(self.comp(year, estate[year], estate["buy_price_2024"]))
+                priceDiff.append(estate[year] - estate["buy_price_2024"])
 
             print("For estate with address " + estate["address"] + " in area " + str(estate["area"]) + " and id " + str(estate["id"]) + ":")
-            print("Buy price 2021:", estate["buy_price_2021"])
-            print("Buy price 2022:", estate["buy_price_2022"])
-            print("Buy price 2023:", estate["buy_price_2023"])
-            print("Buy price 2024:", estate["buy_price_2024"])
-            print("Predicted price for 2025:", price2025)
+            print("Current price(2024): " + str(estate["buy_price_2024"]) + "€")
+            print(f"Buy price 2021: {estate["buy_price_2021"]} ({"+" if priceDiff[0] > 0 else ""}{percentDiffDict[0]:.2f}% or {"+" if priceDiff[0] > 0 else ""}{priceDiff[0]}€ compared to 2024)")
+            print(f"Buy price 2022: {estate["buy_price_2022"]} ({"+" if priceDiff[1] > 0 else ""}{percentDiffDict[1]:.2f}% or {"+" if priceDiff[1] > 0 else ""}{priceDiff[1]}€ compared to 2024)")
+            print(f"Buy price 2023: {estate["buy_price_2023"]} ({"+" if priceDiff[2] > 0 else ""}{percentDiffDict[2]:.2f}% or {"+" if priceDiff[2] > 0 else ""}{priceDiff[2]}€ compared to 2024)")
+            print(f"Predicted price 2025:{estate["buy_price_2025"]} ({"+" if priceDiff[3] > 0 else ""}{percentDiffDict[3]:.2f}% or {"+" if priceDiff[3] > 0 else ""}{priceDiff[3]}€ compared to 2024))")
             print()
+
+            priceDiff.clear()
+            percentDiffDict.clear()
 
 
 
@@ -410,11 +436,7 @@ class PredictEstatePrice(FilterEstates):
                     if(len(self.filteredOptions[key]) > 1):
                         biggerLengthKey = 0
                         for i in self.filteredOptions[key]:
-                            if i == estate[key]: 
-                                biggerLengthKey += 1
-                        if biggerLengthKey == len(self.filteredOptions[key]):
-                            interestedEstates.append(estate)
-                            break
+                            if i == estate[key]: interestedEstates.append(estate)
 
                     # Αν η τιμή του φίλτρου ταυτίζεται με την τιμή που έχουμε στα δεδομένα, αυξάνουμε τον μετρητή.
                     if self.filteredOptions[key] == estate[key]: keysCount += 1
