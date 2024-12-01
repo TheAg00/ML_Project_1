@@ -2,6 +2,10 @@ import requests
 import numpy as np
 from scipy import stats
 
+import kagglehub
+
+
+
 
 # Συνάρτηση που παίρνει τα δεδομένα από το API.
 def getData():
@@ -465,6 +469,12 @@ class PredictEstatePrice(FilterEstates):
     
 
 if __name__ == "__main__":
+    # Download latest version
+    path = kagglehub.dataset_download("alexandrosgkogkos/houses-madrid")
+
+    print("Path to dataset files:", path)
+
+
     # Παίρνουμε τα δεδομένα από το API σε μορφή λίστας.
     realEstateData = getData()
 
@@ -473,7 +483,7 @@ if __name__ == "__main__":
     predict = PredictEstatePrice()
 
     # Εμφανίζουμε μήνυμα υποδοχής του χρήστη και του δίνουμε μενού επιλογών.
-    print("Welcome!")
+    print()
     while True:
         print("Select an option:")
         print("1. Insert data")
