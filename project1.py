@@ -11,8 +11,6 @@ import io
 import zipfile
 
 
-
-
 # Συνάρτηση που παίρνει τα δεδομένα από το API.
 def getData():
     try:
@@ -40,14 +38,16 @@ def getData():
             # Φορτώνουμε το response ως αρχείο και το ανοίγουμε ως zip αρχείο.
             zf = zipfile.ZipFile(io.BytesIO(response.content))
 
-
+            # Διαβάζουμε το csv αρχείο με τα δεδομένα μας και έπειτα το επιστρέφουμε σε μορφή λίστας λεξικών.
             fileName = "houses_Madrid.csv"
             df = pd.read_csv(zf.open(fileName))
-
-
+            data = df.to_dict(orient="records")
+            
+            return data
 
         print("Failed to receive data from API! Status code:", response.status_code)
         exit()
+
     except Exception as e:
         print("Failed to receive data from API!")
         print("Error:", str(e))
@@ -492,17 +492,9 @@ class PredictEstatePrice(FilterEstates):
         self.showResults()
 
 
-
-
-
-    
-
 if __name__ == "__main__":
-    # Παίρνουμε τα δεδομένα από το API σε μορφή λίστας.
-    # realEstateData = getData()
-
-    getData()
-    exit()
+    # Παίρνουμε τα δεδομένα από το API σε μορφή λίστας λεξικών.
+    realEstateData = getData()
 
     filteredOptions = dict()
     filter = FilterEstates(filteredOptions, realEstateData)
