@@ -469,6 +469,21 @@ class PredictEstatePrice(FilterEstates):
     
 
 if __name__ == "__main__":
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # Να εφαρμόσω το dataframe από kaggle.
     # Download latest version
     path = kagglehub.dataset_download("alexandrosgkogkos/houses-madrid")
 
