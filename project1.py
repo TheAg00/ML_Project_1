@@ -466,10 +466,11 @@ class PredictEstatePrice(FilterEstates):
                     # Σε περίπτωση που υπάρχει κλειδί με λίστα που έχει παραπάνω από μία τιμή,
                     # ελέγχουμε αν οι τιμές ταυτίζονται με τις τιμές των δεδομένων και αν ναι,
                     # αυξάνουμε το μετρητή και αποθηκεύουμε το ακίνητο στη λίστα με τα ακίνητα που ενδιαφέρεατι ο χρήστης.
-                    if(len(self.filteredOptions[key]) > 1):
-                        biggerLengthKey = 0
-                        for i in self.filteredOptions[key]:
-                            if i == estate[key]: interestedEstates.append(estate)
+                    
+                    if type(self.filteredOptions[key]) != bool:
+                        if len(self.filteredOptions[key]) > 1:
+                            for i in self.filteredOptions[key]:
+                                if i == estate[key]: interestedEstates.append(estate)
 
                     # Αν η τιμή του φίλτρου ταυτίζεται με την τιμή που έχουμε στα δεδομένα, αυξάνουμε τον μετρητή.
                     if self.filteredOptions[key] == estate[key]: keysCount += 1
@@ -501,7 +502,7 @@ if __name__ == "__main__":
     predict = PredictEstatePrice()
 
     # Εμφανίζουμε μήνυμα υποδοχής του χρήστη και του δίνουμε μενού επιλογών.
-    print()
+    print("Welcome!")
     while True:
         print("Select an option:")
         print("1. Insert data")
