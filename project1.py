@@ -1,8 +1,14 @@
+# Βιβλιοθήκες που πρέπει να γίνουν install:
+# pip install kagglehub
+
+
 import requests
 import numpy as np
 from scipy import stats
-
-import kagglehub
+import pandas as pd
+import base64
+import io
+import zipfile
 
 
 
@@ -10,20 +16,43 @@ import kagglehub
 # Συνάρτηση που παίρνει τα δεδομένα από το API.
 def getData():
     try:
-        # Κάνουμε ένα GET request στο API.
-        response = requests.get("http://127.0.0.1:5000/get_data")
+        # Ετοιμάζουμε το url από το οποίο θα κατεβάσουμε τα δεδομένα.
+        baseURL = "https://www.kaggle.com/api/v1"
+        ownerSlug = "alexandrosgkogkos"
+        datasetSlug = "houses-madrid"
+        datasetVersion = "1"
+
+        url = f"{baseURL}/datasets/download/{ownerSlug}/{datasetSlug}?datasetVersionNumber={datasetVersion}"
+
+        # Δημιουργούμε ένα base64 κωδικοποιημένο string για authentication. Το αποτέλεσμα θα είναι σε μορφή ASCII.
+        username = "alexandrosgkogkos"
+        key = "1206aa0b3fd9af10aa7c6cc56cb63c56"
+        creds = base64.b64encode(bytes(f"{username}:{key}", "ISO-8859-1")).decode("ascii")
+        headers = {
+            "Authorization": f"Basic {creds}"
+        }
+
+        # Κάνουμε GET request.
+        response = requests.get(url, headers=headers)
 
         # Ελέγχουμε αν το request ήταν επιτυχές.
         if response.status_code == 200:
-            print("Data received from API successfully!")
+            # Φορτώνουμε το response ως αρχείο και το ανοίγουμε ως zip αρχείο.
+            zf = zipfile.ZipFile(io.BytesIO(response.content))
 
-            # Επιστρέφουμε τα δεδομένα ως λίστα λεξικών.
-            return response.json()
+
+            fileName = "houses_Madrid.csv"
+            df = pd.read_csv(zf.open(fileName))
+
+
 
         print("Failed to receive data from API! Status code:", response.status_code)
+        exit()
     except Exception as e:
         print("Failed to receive data from API!")
         print("Error:", str(e))
+        exit()
+
 
 class FilterEstates():
     def __init__(self, filteredOptions, realEstateData):
@@ -409,10 +438,10 @@ class PredictEstatePrice(FilterEstates):
 
             print("For estate with address " + estate["address"] + " in area " + str(estate["area"]) + " and id " + str(estate["id"]) + ":")
             print("Current price(2024): " + str(estate["buy_price_2024"]) + "€")
-            print(f"Buy price 2021: {estate["buy_price_2021"]} ({"+" if priceDiff[0] > 0 else ""}{percentDiffDict[0]:.2f}% or {"+" if priceDiff[0] > 0 else ""}{priceDiff[0]}€ compared to 2024)")
-            print(f"Buy price 2022: {estate["buy_price_2022"]} ({"+" if priceDiff[1] > 0 else ""}{percentDiffDict[1]:.2f}% or {"+" if priceDiff[1] > 0 else ""}{priceDiff[1]}€ compared to 2024)")
-            print(f"Buy price 2023: {estate["buy_price_2023"]} ({"+" if priceDiff[2] > 0 else ""}{percentDiffDict[2]:.2f}% or {"+" if priceDiff[2] > 0 else ""}{priceDiff[2]}€ compared to 2024)")
-            print(f"Predicted price 2025:{estate["buy_price_2025"]} ({"+" if priceDiff[3] > 0 else ""}{percentDiffDict[3]:.2f}% or {"+" if priceDiff[3] > 0 else ""}{priceDiff[3]}€ compared to 2024))")
+            print(f"Buy price 2021: {estate['buy_price_2021']} ({'+' if priceDiff[0] > 0 else ''}{percentDiffDict[0]:.2f}% or {'+' if priceDiff[0] > 0 else ''}{priceDiff[0]}€ compared to 2024)")
+            print(f"Buy price 2022: {estate['buy_price_2022']} ({'+' if priceDiff[1] > 0 else ''}{percentDiffDict[1]:.2f}% or {'+' if priceDiff[1] > 0 else ''}{priceDiff[1]}€ compared to 2024)")
+            print(f"Buy price 2023: {estate['buy_price_2021']} ({'+' if priceDiff[2] > 0 else ''}{percentDiffDict[2]:.2f}% or {'+' if priceDiff[2] > 0 else ''}{priceDiff[2]}€ compared to 2024)")
+            print(f"Predicted price 2025: {estate['buy_price_2025']} ({'+' if priceDiff[3] > 0 else ''}{percentDiffDict[3]:.2f}% or {'+' if priceDiff[3] > 0 else ''}{priceDiff[3]}€ compared to 2024)")
             print()
 
             priceDiff.clear()
@@ -469,29 +498,11 @@ class PredictEstatePrice(FilterEstates):
     
 
 if __name__ == "__main__":
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # Να εφαρμόσω το dataframe από kaggle.
-    # Download latest version
-    path = kagglehub.dataset_download("alexandrosgkogkos/houses-madrid")
-
-    print("Path to dataset files:", path)
-
-
     # Παίρνουμε τα δεδομένα από το API σε μορφή λίστας.
-    realEstateData = getData()
+    # realEstateData = getData()
+
+    getData()
+    exit()
 
     filteredOptions = dict()
     filter = FilterEstates(filteredOptions, realEstateData)
