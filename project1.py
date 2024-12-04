@@ -1,5 +1,5 @@
 # Βιβλιοθήκες που πρέπει να γίνουν install:
-# pip install kagglehub
+# pip install requests numpy pandas base64 io zipfile
 
 
 import requests
@@ -119,18 +119,22 @@ class FilterEstates():
 
         insertedData["address"] = insertedAddress
 
-        # Τιμή πώλησης.
-        while True:
-            print("Insert price: ", end = "")
-            try:
-                insertedPrice = int(input())
+        # Τωρινή τιμή πώλησης.
+        for year in [2024, 2021, 2022, 2023]:
+            while True:
+                print("Insert price for " + str(year) + ":", end = "")
+                try:
+                    insertedPrice = int(input())
 
-                if insertedPrice > 0: break
-                print("Invalid Input!")
-            except(ValueError):
-                print("Invalid Input!")
+                    if insertedPrice > 0: break
+                    print("Invalid Input!")
+                except(ValueError):
+                    print("Invalid Input!")
 
-        insertedData["buy_price_2024"] = insertedPrice
+            insertYear = "buy_price_" + str(year)
+            print("insertYear:", insertYear)
+            insertedData[insertYear] = insertedPrice
+            print("insertedData[insertYear]:", insertedData[insertYear])
 
         # Έτος κτήσης.
         while True:
@@ -143,7 +147,7 @@ class FilterEstates():
             except(ValueError):
                 print("Invalid Input!")
 
-        insertedData["build_year"] = insertedBuildYear
+        insertedData["built_year"] = insertedBuildYear
 
         # Ζητάμε από τον χρήστη να μας πει αν το ακίνητο έχει πάρκιγκ.
         while True:
@@ -213,7 +217,7 @@ class FilterEstates():
         while True:
             try:
                 print("Insert the minimum square meters you are interested in: ", end = "")
-                minM2 = float(input())
+                minM2 = int(input())
                 if minM2 > 0: 
                     interestedM2.append(minM2)
                     break
@@ -225,7 +229,7 @@ class FilterEstates():
         while True:
             try:
                 print("Insert the maximum square meters you are interested in: ", end = "")
-                maxM2 = float(input())
+                maxM2 = int(input())
                 if maxM2 >= minM2:
                     interestedM2.append(maxM2)
                     break
@@ -305,7 +309,7 @@ class FilterEstates():
         # Ρωτάμε τον χρήστη το πόσο παλιό θέλει το ακίνητό του.
         while True:
             try:
-                print("Insert the minimum build year you are interested in(Earliest avaliable build year:", end = "")
+                print("Insert the minimum build year you are interested in:", end = "")
                 minBuildYear = int(input())
                 if minBuildYear >= 0: 
                     interestedBuildYear.append(minBuildYear)
@@ -317,7 +321,7 @@ class FilterEstates():
         # Ρωτάμε τον χρήστη το πόσο νέο θέλει το ακίνητό του.
         while True:
             try:
-                print("Insert the maximum build year you are interested in(Latest avaliable build year:", end = "")
+                print("Insert the maximum build year you are interested in:", end = "")
                 maxBuildYear = int(input())
                 if maxBuildYear >= minBuildYear:
                     interestedBuildYear.append(maxBuildYear)
@@ -327,7 +331,7 @@ class FilterEstates():
                 print("Invalid Input!")
         
         # Ενημερώνουμε το φίλτρο μας.
-        self.filteredOptions["build_year"] = interestedBuildYear
+        self.filteredOptions["built_year"] = interestedBuildYear
         
 
 
@@ -415,7 +419,6 @@ class PredictEstatePrice(FilterEstates):
 
     def comp(self, year, estate, estate2024):
         percentDiff = abs(estate - estate2024) / ((estate2024 + estate) / 2) * 100 # abs(b - a) / ((a + b) / 2) * 100
-        if year < "buy_price_2024": percentDiff = percentDiff * (-1)
 
         return percentDiff
 
@@ -438,42 +441,51 @@ class PredictEstatePrice(FilterEstates):
 
             print("For estate with address " + estate["address"] + " in area " + str(estate["area"]) + " and id " + str(estate["id"]) + ":")
             print("Current price(2024): " + str(estate["buy_price_2024"]) + "€")
-            print(f"Buy price 2021: {estate['buy_price_2021']} ({'+' if priceDiff[0] > 0 else ''}{percentDiffDict[0]:.2f}% or {'+' if priceDiff[0] > 0 else ''}{priceDiff[0]}€ compared to 2024)")
-            print(f"Buy price 2022: {estate['buy_price_2022']} ({'+' if priceDiff[1] > 0 else ''}{percentDiffDict[1]:.2f}% or {'+' if priceDiff[1] > 0 else ''}{priceDiff[1]}€ compared to 2024)")
-            print(f"Buy price 2023: {estate['buy_price_2021']} ({'+' if priceDiff[2] > 0 else ''}{percentDiffDict[2]:.2f}% or {'+' if priceDiff[2] > 0 else ''}{priceDiff[2]}€ compared to 2024)")
-            print(f"Predicted price 2025: {estate['buy_price_2025']} ({'+' if priceDiff[3] > 0 else ''}{percentDiffDict[3]:.2f}% or {'+' if priceDiff[3] > 0 else ''}{priceDiff[3]}€ compared to 2024)")
+            print(f"Buy price 2021: {estate['buy_price_2021']} ({'+' if priceDiff[0] > 0 else '-'}{percentDiffDict[0]:.2f}% or {'+' if priceDiff[0] > 0 else ''}{priceDiff[0]}€ compared to 2024)")
+            print(f"Buy price 2022: {estate['buy_price_2022']} ({'+' if priceDiff[1] > 0 else '-'}{percentDiffDict[1]:.2f}% or {'+' if priceDiff[1] > 0 else ''}{priceDiff[1]}€ compared to 2024)")
+            print(f"Buy price 2023: {estate['buy_price_2023']} ({'+' if priceDiff[2] > 0 else '-'}{percentDiffDict[2]:.2f}% or {'+' if priceDiff[2] > 0 else ''}{priceDiff[2]}€ compared to 2024)")
+            print(f"Predicted price 2025: {estate['buy_price_2025']} ({'+' if priceDiff[3] > 0 else '-'}{percentDiffDict[3]:.2f}% or {'+' if priceDiff[3] > 0 else ''}{priceDiff[3]}€ compared to 2024)")
             print()
 
             priceDiff.clear()
             percentDiffDict.clear()
 
 
+    def identifyValue(self, estate, key):
+        rangedValues = ["m2", "n_rooms", "buy_price_2024", "built_year"]
+
+        # Ελέγχουμε αν ο χρήστης έδωσε ως τιμή φίλτρου κάποιο εύρος τιμών(π.χ. τετραγωνικά μέτρα, αριθμός δωματίων κτλ.)
+        # και ελέγχουμε αν η συγκεκριμένη τιμή του ακινήτου ταυτίζεται με αυτό το εύρος.
+        if key in rangedValues:
+            if estate[key] >= self.filteredOptions[key][0] and estate[key] <= self.filteredOptions[key][1]: return 1
+            return 0
+
+        # Ελέγχουμε αν δόθηκε σε κάποιο φίλτρο υπάρχει λίστα, δηλαδή ο χρήστης επέλεξε παραπάνω από μία τιμή.
+        if key == "area":
+            # Ελέγχουμε αν οι τιμές του φίλτρου υπάρχουν στο ακίνητο.
+            for keyVal in self.filteredOptions[key]:
+                if keyVal == estate[key]: return 1
+            return 0
+
+        if self.filteredOptions[key] == estate[key]: return 1
+
+        return 0
+
 
     def printPrices(self):
         filterKeys = list(self.filteredOptions.keys())
         totalKeys = len(filterKeys)
-        notComparableKeys = ["address", "area", "has_parking"]
 
         # Αν ο χρήστης επέλεξε φίλτρα, ελέγχουμε τα ακίνητα που ταυτίζουν με αυτά. Αλλιώς εμφανίζουμε τις προβλέψεις για όλα τα ακίνητα.
         if totalKeys > 0:
             interestedEstates = list()
             
-            
             # Για κάθε ακίνητο, ελέγχουμε αν ισχύουν τα φίλτρα που επέλεξε ο χρήστης.
             for estate in self.realEstateData:
                 keysCount = 0
                 for key in filterKeys:
-                    # Σε περίπτωση που υπάρχει κλειδί με λίστα που έχει παραπάνω από μία τιμή,
-                    # ελέγχουμε αν οι τιμές ταυτίζονται με τις τιμές των δεδομένων και αν ναι,
-                    # αυξάνουμε το μετρητή και αποθηκεύουμε το ακίνητο στη λίστα με τα ακίνητα που ενδιαφέρεατι ο χρήστης.
-                    
-                    if type(self.filteredOptions[key]) != bool:
-                        if len(self.filteredOptions[key]) > 1:
-                            for i in self.filteredOptions[key]:
-                                if i == estate[key]: interestedEstates.append(estate)
-
                     # Αν η τιμή του φίλτρου ταυτίζεται με την τιμή που έχουμε στα δεδομένα, αυξάνουμε τον μετρητή.
-                    if self.filteredOptions[key] == estate[key]: keysCount += 1
+                    keysCount += self.identifyValue(estate, key)
 
                 # Αν ο μετρητής είναι ίσος με τον αριθμό των φίλτρων που επέλεξε ο χρήστης, τότε το ακίνητο ταιριάζει με τις προτημήσεις του χρήστη.
                 if keysCount == totalKeys: interestedEstates.append(estate)
@@ -484,13 +496,9 @@ class PredictEstatePrice(FilterEstates):
 
         self.predictPrice(self.realEstateData)
 
-    
-    def showResults(self):
-        self.printPrices()
-
     def showPredictions(self):
         self.chooseFitler()
-        self.showResults()
+        self.printPrices()
 
 
 if __name__ == "__main__":
