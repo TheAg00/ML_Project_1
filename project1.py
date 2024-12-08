@@ -1,5 +1,12 @@
-# Βιβλιοθήκες που πρέπει να γίνουν install:
-# pip install requests numpy pandas base64 io zipfile
+# Γκώγκος Αλέξανδρος 01291
+#
+# Dataset που χρησιμοποιείθηκε(Madrid real estate market): https://www.kaggle.com/datasets/mirbektoktogaraev/madrid-real-estate-market
+# Επειδή θεώρησα πως το dataset ήταν πολύ μεγάλο(21742 γραμμές x 58 στήλες), κράτησα μόνο τις πρώτες 100 γραμμές και 12 στήλες και ανέβασα το νέο dataset στο kaggle.
+# Έπειτα, παίρνω τα δεδομένα χρησιμοποιώντας API.
+# Το τελικό dataset που χρησιμοποιείθηκε στην άσκηση είναι(houses_Madrid): https://www.kaggle.com/datasets/alexandrosgkogkos/houses-madrid
+#
+# Βιβλιοθήκες που έγιναν install:
+# pip install requests numpy scipy pandas pybase64
 
 
 import requests
@@ -349,7 +356,7 @@ class FilterEstates():
             print("Invalid Input!")
 
 
-    # Εφμανίζουμε μενού επιλογής για το φίλτρο, ώστε ο χρήστης να επιλέξει τα χαρακτηρηστικά που τον ενδιαφέρουν.
+    # Εφμανίζουμε μενού επιλογής για το φίλτρο.
     def filterMenu(self):
         while True:
             print("Choose from the filter below which estate you're intrested in:")
@@ -373,7 +380,7 @@ class FilterEstates():
 
 
     def chooseFitler(self):
-
+        # Ο χρήστης μπορεί να επιλέξει χαρακτηριστηκά του ακινήτου που τον ενδιφέρουν και έπειτα αποθηκεύονται σε φίλτρο.
         while True:
             filterChoice = self.filterMenu()
             print()
@@ -407,9 +414,11 @@ class PredictEstatePrice(FilterEstates):
         super().__init__(filteredOptions, realEstateData)
         self.y = np.array([2021, 2022, 2023, 2024])
 
+    # Συνάρτηση πρόβλεψης της μελλοντικής τιμής.
     def predictionEquation(self, slope, x, y_intercept):
         return int(y_intercept + slope * x) # y = β0 + β1 * x
 
+    # Συνάρτηση που βρίσκει τη ποσοστιαία διαφορά ανάμεσα σε δύο τιμές.
     def comp(self, estateYear, estate2024):
         percentDiff = abs(estateYear - estate2024) / ((estate2024 + estateYear) / 2) * 100 # abs(b - a) / ((a + b) / 2) * 100
 
